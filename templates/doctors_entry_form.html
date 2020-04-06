@@ -1,0 +1,167 @@
+{% load static %} {% include 'admin.html' %} {% block content %}
+
+<div class="container shadow-lg p-5" id="loadableBody">
+  {% if message %}
+  <div class="alert alert-success text-center" role="alert" id="msg">
+    <span class="font-weight-bold">{{status}}! </span> {{message}}
+  </div>
+  {% endif %}
+  <form class="form-group" method="post" action="doctors_entry">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Doctor Name</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="docName"
+      />
+    </div>
+    <div class="form-group">
+      <label>Speciality</label>
+      <select class="form-control" required name="splstIn">
+        <option selected disabled>Choose</option>
+        <option value="Allergist">Allergist</option>
+        <option value="Anaesthesiologist">Anaesthesiologist</option>
+        <option value="Andrologist">Andrologist</option>
+        <option value="Cardiologist">Cardiologist</option>
+        <option value="Cardiac Electrophysiologist"
+          >Cardiac Electrophysiologist</option
+        >
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Emergency Room (ER) Doctors"
+          >Emergency Room (ER) Doctors</option
+        >
+        <option value="Endocrinologist">Endocrinologist</option>
+        <option value="Epidemiologist">Epidemiologist</option>
+        <option value="Family Medicine Physician"
+          >Family Medicine Physician</option
+        >
+        <option value="Gastroenterologist">Gastroenterologist</option>
+        <option value="Geriatrician">Geriatrician</option>
+        <option value="Hyperbaric Physician">Hyperbaric Physician</option>
+        <option value="Hematologist">Hematologist</option>
+        <option value="Hepatologist">Hepatologist</option>
+        <option value="Immunologist">Immunologist</option>
+        <option value="Infectious Disease Specialist"
+          >Infectious Disease Specialist</option
+        >
+        <option value="Intensivist">Intensivist</option>
+        <option value="Internal Medicine Specialist"
+          >Internal Medicine Specialist</option
+        >
+        <option value="Maxillofacial Surgeon / Oral Surgeon"
+          >Maxillofacial Surgeon / Oral Surgeon</option
+        >
+        <option value="Medical Examiner">Medical Examiner</option>
+        <option value="Medical Geneticist">Medical Geneticist</option>
+        <option value="Neonatologist">Neonatologist</option>
+        <option value="Nephrologist">Nephrologist</option>
+        <option value="Neurologist">Neurologist</option>
+        <option value="Neurosurgeon">Neurosurgeon</option>
+        <option value="Nuclear Medicine Specialist"
+          >Nuclear Medicine Specialist</option
+        >
+        <option value="Obstetrician/Gynecologist (OB/GYN)"
+          >Obstetrician/Gynecologist (OB/GYN)</option
+        >
+        <option value="Occupational Medicine Specialist"
+          >Occupational Medicine Specialist</option
+        >
+        <option value="Oncologist">Oncologist</option>
+        <option value="Ophthalmologist">Ophthalmologist</option>
+        <option value="Orthopedic Surgeon / Orthopedist"
+          >Orthopedic Surgeon / Orthopedist</option
+        >
+        <option value="Otolaryngologist (also ENT Specialist)"
+          >Otolaryngologist (also ENT Specialist)</option
+        >
+        <option value="Parasitologist">Parasitologist</option>
+        <option value="Pathologist">Pathologist</option>
+        <option value="Perinatologist">Perinatologist</option>
+        <option value="Periodontist">Periodontist</option>
+        <option value="Pediatrician">Pediatrician</option>
+        <option value="Physiatrist">Physiatrist</option>
+        <option value="Plastic Surgeon">Plastic Surgeon</option>
+        <option value="Psychiatrist">Psychiatrist</option>
+        <option value="Pulmonologist">Pulmonologist</option>
+        <option value="Radiologist">Radiologist</option>
+        <option value="Rheumatologist">Rheumatologist</option>
+        <option value="Sleep Doctor / Sleep Disorders Specialist"
+          >Sleep Doctor / Sleep Disorders Specialist</option
+        >
+        <option value="Spinal Cord Injury Specialist"
+          >Spinal Cord Injury Specialist</option
+        >
+        <option value="Sports Medicine Specialist"
+          >Sports Medicine Specialist</option
+        >
+        <option value="Surgeon">Surgeon</option>
+        <option value="Thoracic Surgeon">Thoracic Surgeon</option>
+        <option value="Urologist">Urologist</option>
+        <option value="Vascular Surgeon">Vascular Surgeon</option>
+        <option value="Veterinarian">Veterinarian</option>
+        <option value="Palliative Care Specialist"
+          >Palliative Care Specialist</option
+        >
+        <option value="Acupuncturist">Acupuncturist</option>
+        <option value="Audiologist">Audiologist</option>
+        <option value="Ayurvedic Practioner">Ayurvedic Practioner</option>
+        <option value="Chiropractor">Chiropractor</option>
+        <option value="Diagnostician">Diagnostician</option>
+        <option value="Homeopathic Doctor">Homeopathic Doctor</option>
+        <option value="Microbiologist">Microbiologist</option>
+        <option value="Naturopathic Doctor">Naturopathic Doctor</option>
+        <option value="Pharmacist">Pharmacist</option>
+        <option value="Physiotherapist">Physiotherapist</option>
+        <option value="Podiatrist / Chiropodist"
+          >Podiatrist / Chiropodist</option
+        >
+        <option value="Registered Massage Therapist"
+          >Registered Massage Therapist</option
+        >
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <select name="gender" class="form-control" required>
+        <option disabled selected>Choose</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="docMobile"
+      />
+    </div>
+    <div class="form-group">
+      <label>Locality</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="docLocality"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  setTimeout(function() {
+    if ($("#msg").length > 0) {
+      $("#msg").remove();
+    }
+  }, 3000);
+</script>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% load static %} {% include 'admin.html' %} {% block content %}
+
+<div class="container shadow-lg p-5" id="loadableBody">
+  <div class="container p-3 mt-2 rounded" id="prescriptionFor">
+    <h6 class="text-dark pb-2 pt-1">Prescription For...</h6>
+    <form action="prescription" method="POST" class="form-group">
+      {% csrf_token %}
+      <input
+        type="text"
+        class="form-control"
+        name="patientIdForPres"
+        placeholder="Enter Patient's Id"
+      />
+      <textarea
+        id="textbox"
+        required
+        class="form-control mt-2"
+        style="height: 150px;"
+        name="fullPrescription"
+        placeholder="Prescription"
+      ></textarea
+      ><a
+        href="#Recording"
+        id="start-btn"
+        title="Start"
+        class="btn btn-sm btn-success float-right mt-1"
+      >
+        Say Something
+      </a>
+
+      <button class="mt-3 btn btn-success">Generate</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  var SpeechRecognition = window.webkitSpeechRecognition;
+
+  var recognition = new SpeechRecognition();
+
+  var Textbox = $("#textbox");
+  var instructions = $("instructions");
+
+  var Content = "";
+
+  recognition.continuous = true;
+
+  recognition.onresult = function (event) {
+    var current = event.resultIndex;
+
+    var transcript = event.results[current][0].transcript;
+
+    Content += transcript;
+    Textbox.val(Content);
+  };
+
+  recognition.onstart = function () {
+    instructions.text("Voice recognition is ON.");
+  };
+
+  recognition.onspeechend = function () {
+    instructions.text("No activity.");
+  };
+
+  recognition.onerror = function (event) {
+    if (event.error == "no-speech") {
+      instructions.text("Try again.");
+    }
+  };
+
+  $("#start-btn").on("click", function (e) {
+    if (Content.length) {
+      Content += " ";
+    }
+    recognition.start();
+  });
+
+  Textbox.on("input", function () {
+    Content = $(this).val();
+  });
+</script>
+
+{% endblock %}

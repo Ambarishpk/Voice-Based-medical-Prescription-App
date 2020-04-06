@@ -1,0 +1,55 @@
+{% load static %} {% include 'admin.html' %} {% block content %}
+
+<div
+  class="container shadow-lg p-3"
+  style="background-color: white; width:1000px; height:630px; overflow-y: auto;"
+>
+  <div class="search-container">
+    <form class="form-inline float-right">
+      <div class="form-group mx-sm-3 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          autocomplete="off"
+          placeholder="Search Patients"
+        />
+      </div>
+      <button type="submit" class="btn btn-white mb-2">
+        <i class="fa fa-search text-dark" aria-hidden="true"></i>
+      </button>
+    </form>
+  </div>
+  <table class="mt-5 table table-white">
+    <thead class="bg-dark text-white">
+      <tr>
+        <th scope="col">Patient Id</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Disease</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Location</th>
+        <th scope="col">Doctor Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patients_record %}
+      <tr>
+        <td>{{patient.patient_id}}</td>
+        <td>{{patient.patient_name}}</td>
+        <td>{{patient.patient_age}}</td>
+        <td>{{patient.patient_gender}}</td>
+        <td>{{patient.patient_disease}}</td>
+        <td>{{patient.patient_mob_num}}</td>
+        <td>{{patient.patient_mail}}</td>
+        <td>{{patient.patient_locality}}</td>
+        <td>{{patient.visting_doctor_name}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

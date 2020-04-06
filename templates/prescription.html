@@ -1,0 +1,104 @@
+{% load static %} {% include 'admin.html' %} {% block content %}
+
+<div
+  class="container shadow-lg pl-5 pr-5 pb-5 pt-3"
+  style="background-color: white; width: 800px; height: 630px;"
+>
+  {% if message %}
+  <div class="alert alert-success text-center" role="alert" id="msg">
+    <span class="font-weight-bold">{{status}} </span> {{message}} successfully
+  </div>
+  {% endif %}
+  <form
+    action="mailSend"
+    method="POST"
+    id="prescriptionSheet"
+    class="container shadow-lg p-2 mt-2 rounded"
+  >
+    {% csrf_token %}
+    <div class="container" id="mainContent">
+      <div class="container">
+        <div class="row">
+          <div class="col mt-2 text-center h5 text-danger presc-title">
+            Prescription
+          </div>
+          <div class="col-3 float-right date">
+            <u>{{date}}</u>
+          </div>
+        </div>
+        <hr />
+        <div class="row text-primary small">
+          <div class="col">
+            <span class="text-dark font-weight-bold pr-1">ID:</span>
+            {{object.patient_id}}
+          </div>
+          <div class="col-6">
+            <span class="text-dark font-weight-bold pr-1">Name:</span>
+            {{object.patient_name}}
+          </div>
+          <div class="col-3">
+            <span class="text-dark font-weight-bold pr-1">Age:</span>
+            {{object.patient_age}}
+          </div>
+        </div>
+        <div class="row mt-2 text-primary small">
+          <div class="col">
+            <span class="text-dark font-weight-bold pr-1">Sex:</span>
+            {{object.patient_gender}}
+          </div>
+          <div class="col-6">
+            <span class="text-dark font-weight-bold pr-1">Mobile:</span>
+            {{object.patient_mob_num}}
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <hr />
+      <div class="container p-3" id="prescription-body">
+        <div class="row">
+          <div>
+            <p class="text-dark pl-3 pr-3">{{presc}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-1">
+        <div class="row">
+          <div class="col-lg float-right text-dark">Signature</div>
+        </div>
+        <div class="row">
+          <div class="col-lg float-right text-info doct_sign">dr.hendry</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-1">
+      <div class="row">
+        <div class="col">
+          <button class="form-control text-center btn btn-sm btn-danger">
+            Send
+          </button>
+        </div>
+        <div class="col">
+          <a
+            href="Save/{{id}}"
+            class="form-control text-center btn btn-sm btn-danger"
+          >
+            Save
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="container mt-1" style="width: 480px;"></div>
+</div>
+<div id="editor"></div>
+
+<script>
+  setTimeout(function () {
+    if ($("#msg").length > 0) {
+      $("#msg").remove();
+    }
+  }, 3000);
+</script>
+
+{% endblock %}

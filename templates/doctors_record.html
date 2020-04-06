@@ -1,0 +1,47 @@
+{% load static %} {% include 'home.html' %} {% block content %}
+
+<div
+  class="container shadow-lg p-3"
+  style="background-color: white; width:800px; height:630px; overflow-y: auto;"
+>
+  <div class="search-container">
+    <form class="form-inline float-right">
+      <div class="form-group mx-sm-3 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          autocomplete="off"
+          placeholder="Search Doctors"
+        />
+      </div>
+      <button type="submit" class="btn btn-white mb-2">
+        <i class="fa fa-search text-dark" aria-hidden="true"></i>
+      </button>
+    </form>
+  </div>
+  <table class="mt-5 table table-white">
+    <thead class="bg-dark text-white">
+      <tr>
+        <th scope="col">Doctor Name</th>
+        <th scope="col">Speciality</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for doctor in doctors_record %}
+      <tr>
+        <td>{{doctor.doctor_name}}</td>
+        <td>{{doctor.specialist_in}}</td>
+        <td>{{doctor.doctor_gender}}</td>
+        <td>{{doctor.doctor_mobile_number}}</td>
+        <td>{{doctor.doctor_locality}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

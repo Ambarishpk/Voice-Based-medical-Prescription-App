@@ -1,0 +1,111 @@
+{% load static %} {% include 'home.html' %} {% block content %}
+
+<div class="container shadow-lg p-5" id="loadableBody">
+  {% if message %}
+  <div class="alert alert-success text-center" role="alert" id="msg">
+    <span class="font-weight-bold">{{status}}! </span> {{message}}
+  </div>
+  {% endif %}
+  <form class="form-group" method="post" action="patients_entry">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Patient Id</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patId"
+      />
+    </div>
+    <div class="form-group">
+      <label>Patient Name</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patName"
+      />
+    </div>
+    <div class="form-group">
+      <label>Age</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patAge"
+      />
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <select name="gender" class="form-control" required>
+        <option disabled selected>Choose</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Disease</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patDisease"
+      />
+    </div>
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patMobile"
+      />
+    </div>
+    <div class="form-group">
+      <label>Mail</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="patMail"
+      />
+    </div>
+    <div class="form-group">
+      <label>Locality</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        autocomplete="off"
+        name="docLocality"
+      />
+    </div>
+    <div class="form-group">
+      <label>Doctor Name</label>
+      <select name="patDoc" class="form-control">
+        <option selected disabled>Choose</option>
+        {% for doctor in doctors_record %}
+        <option value="{{doctor.doctor_name}}">{{doctor.doctor_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  setTimeout(function() {
+    if ($("#msg").length > 0) {
+      $("#msg").remove();
+    }
+  }, 3000);
+</script>
+
+{% endblock %}
