@@ -10,7 +10,7 @@
   </div>
   {% endif %}
   <form
-    action="mailSend"
+    action="mailSend/{{id}}/"
     method="POST"
     id="prescriptionSheet"
     class="container shadow-lg p-2 mt-2 rounded"
@@ -58,6 +58,7 @@
         <div class="row">
           <div>
             <p class="text-dark pl-3 pr-3">{{presc}}</p>
+            <textarea hidden name="fullPresc">{{presc}}</textarea>
           </div>
         </div>
       </div>
@@ -68,23 +69,12 @@
         <div class="row">
           <div class="col-lg float-right text-info doct_sign">dr.hendry</div>
         </div>
-      </div>
-    </div>
-
-    <div class="container mt-1">
-      <div class="row">
-        <div class="col">
-          <button class="form-control text-center btn btn-sm btn-danger">
-            Send
-          </button>
-        </div>
-        <div class="col">
-          <a
-            href="Save/{{id}}"
-            class="form-control text-center btn btn-sm btn-danger"
-          >
-            Save
-          </a>
+        <div class="row">
+          <div class="col">
+            <button class="form-control text-center btn btn-sm btn-danger">
+              Send
+            </button>
+          </div>
         </div>
       </div>
     </div>

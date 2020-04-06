@@ -138,35 +138,33 @@ def prescription(request):
 
         return render(request, 'prescription.html', context)
 
-# Save as PDF
-
-
-def Save(request, id):
-
-    fs = FileSystemStorage
-    pat_id = id
-    file = id+'-Prescription'
-
-    pdfkit.from_file('templates/prescription.html', file+'.pdf')
-
-    # fs.save('original/', pdfFile)
-
-    return HttpResponse('Done')
 
 # Mail Sender
 
 
-def mailSend(request):
+def mailSend(request, id):
 
     if request.method == "POST":
 
+        object = Patient.objects.filter(patient_id=id)[0]
+
+        pat_id = "Patient Id:   "+object.patient_id
+        pat_name = "Patient Name:   "+object.patient_name
+        pat_disease = "Disease: "+object.patient_disease
+        prescription = "Prescription:   "+request.POST.get('fullPresc')
+
         subject = 'Django Test Email'
-        body = 'Hey Whats Up !'
+        body = (pat_id + '\n'
+                + pat_name + '\n'
+                + pat_disease + '\n'
+                + prescription)
         sender = 'silukkusatta1998@gmail.com'
         receiver = 'aambu1998@gmail.com'
 
         response = send_mail(subject, body, sender, [
                              receiver], fail_silently=False)
+
+        response = 1
 
         if response == 1:
             context = {

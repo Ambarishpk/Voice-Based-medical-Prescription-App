@@ -14,6 +14,6 @@ urlpatterns = [
     path('patients_entry', views.patients_entry, name='patients_entry'),
     path('prescriptionFor', views.prescriptionFor, name='prescriptionFor'),
     path('prescription', views.prescription, name='prescription'),
-    path('mailSend', views.mailSend, name='mailSend'),
-    url(r'^Save/(?P<id>[-\w.]+\w{0,50})/$', views.Save, name='Save'),
+    url(r'^mailSend/(?P<id>[-\w.]+\w{0,50})/$',
+        views.mailSend, name='mailSend'),
 ]
