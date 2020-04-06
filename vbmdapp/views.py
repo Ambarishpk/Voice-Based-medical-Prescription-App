@@ -6,6 +6,7 @@ from datetime import date
 from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 import pdfkit
+from django.shortcuts import redirect
 
 
 # home_view
@@ -171,7 +172,7 @@ def mailSend(request, id):
                 'status': 'Success',
                 'message': 'Mail has been sent successfully.'
             }
-            return render(request, 'admin.html', context)
+            return redirect('myAdmin')
         else:
             context = {
                 'status': 'Oops !',
